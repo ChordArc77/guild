@@ -31,6 +31,20 @@
 .idea/**/gradle.xml
 .idea/**/libraries
 
+# 디폴트 무시된 파일
+/shelf/
+/workspace.xml
+# Rider에서 무시된 파일
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.Guild.iml
+/modules.xml
+# 에디터 기반 HTTP 클라이언트 요청
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
