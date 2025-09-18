@@ -17,7 +17,7 @@ namespace Cainos.PixelArtTopDown_Basic
         public string layerLower;
         public string sortingLayerLower;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerEnter2D(Collider2D other)
         {
             if (direction == Direction.South && other.transform.position.y < transform.position.y) SetLayerAndSortingLayer(other.gameObject, layerUpper, sortingLayerUpper);
             else
@@ -27,7 +27,7 @@ namespace Cainos.PixelArtTopDown_Basic
 
         }
 
-        private void OnTriggerExit2D(Collider2D other)
+        void OnTriggerExit2D(Collider2D other)
         {
             if (direction == Direction.South && other.transform.position.y < transform.position.y) SetLayerAndSortingLayer(other.gameObject, layerLower, sortingLayerLower);
             else
@@ -36,7 +36,7 @@ namespace Cainos.PixelArtTopDown_Basic
             if (direction == Direction.East && other.transform.position.x > transform.position.x) SetLayerAndSortingLayer(other.gameObject, layerLower, sortingLayerLower);
         }
 
-        private void SetLayerAndSortingLayer( GameObject target, string layer, string sortingLayer )
+        void SetLayerAndSortingLayer( GameObject target, string layer, string sortingLayer )
         {
             target.layer = LayerMask.NameToLayer(layer);
 
@@ -54,6 +54,6 @@ namespace Cainos.PixelArtTopDown_Basic
             South,
             West,
             East
-        }    
+        }
     }
 }

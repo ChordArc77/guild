@@ -10,16 +10,16 @@ namespace Cainos.PixelArtTopDown_Basic
         public Gradient gradient;
         public float time;
 
-        private SpriteRenderer sr;
-        private float timer;
+        SpriteRenderer sr;
+        float timer;
 
-        private void Start()
+        void Start()
         {
             timer = time * Random.value;
             sr = GetComponent<SpriteRenderer>();
         }
 
-        private void Update()
+        void Update()
         {
             if (sr)
             {

@@ -11,25 +11,25 @@ namespace Cainos.PixelArtTopDown_Basic
         public List<SpriteRenderer> runes;
         public float lerpSpeed;
 
-        private Color curColor;
-        private Color targetColor;
+        Color curColor;
+        Color targetColor;
 
-        private void Awake()
+        void Awake()
         {
             targetColor = runes[0].color;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerEnter2D(Collider2D other)
         {
             targetColor.a = 1.0f;
         }
 
-        private void OnTriggerExit2D(Collider2D other)
+        void OnTriggerExit2D(Collider2D other)
         {
             targetColor.a = 0.0f;
         }
 
-        private void Update()
+        void Update()
         {
             curColor = Color.Lerp(curColor, targetColor, lerpSpeed * Time.deltaTime);
 

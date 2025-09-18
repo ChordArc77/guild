@@ -10,18 +10,18 @@ namespace Cainos.PixelArtTopDown_Basic
         public Transform target;
         public float lerpSpeed = 1.0f;
 
-        private Vector3 offset;
+        Vector3 offset;
 
-        private Vector3 targetPos;
+        Vector3 targetPos;
 
-        private void Start()
+        void Start()
         {
             if (target == null) return;
 
             offset = transform.position - target.position;
         }
 
-        private void Update()
+        void Update()
         {
             if (target == null) return;
 
