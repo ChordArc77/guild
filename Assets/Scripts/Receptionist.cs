@@ -5,7 +5,7 @@ public class Receptionist : MonoBehaviour
 {
     [SerializeField] GameObject receptionWindow;
     [SerializeField] List<GameObject> objectsToDisable;
-    [SerializeField] DialogueSO welcomeDialogue;
+    [SerializeField] Dialogue welcomeDialogue;
 
     public void OpenReceptionWindow()
     {
@@ -16,7 +16,7 @@ public class Receptionist : MonoBehaviour
             obj.SetActive(false);
         }
 
-        Dialogue.Instance.AddDialogue(welcomeDialogue);
+        // DialogueManager.Instance.AddDialogue(welcomeDialogue);
     }
 
     public void CloseReceptionWindow()

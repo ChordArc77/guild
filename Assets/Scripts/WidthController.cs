@@ -17,6 +17,7 @@ public class WidthController : MonoBehaviour, ILayoutSelfController
 
     public void SetLayoutHorizontal()
     {
+        if (!rt) return;
         texts = GetComponentsInChildren<TextMeshProUGUI>();
         float widest = texts.Aggregate(0f, (current, text) => Mathf.Max(text.preferredWidth, current));
         rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, widest + padding * 2);
