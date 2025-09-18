@@ -1,34 +1,6 @@
+using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-
-#region Dialogue
-
-[CreateAssetMenu(menuName = "Dialogue/New Dialogue")]
-public class Dialogue : ScriptableObject
-{
-    public string ID;
-    public string HeadNodeID;
-}
-
-#endregion
-
-#region Node
-
-public abstract class DialogueNode : ScriptableObject
-{
-    public string ID;
-    public string Text;
-}
-
-[CreateAssetMenu(menuName = "Dialogue/Nodes/Line")]
-public class DialogueLineNode : DialogueNode
-{
-    public string SpeakerID;
-    public string NextNodeID;
-}
-
-#region ChoiceNode
 
 [CreateAssetMenu(menuName = "Dialogue/Nodes/Choice")]
 public class DialogueChoiceNode : DialogueNode
@@ -57,7 +29,3 @@ public class ChoiceEffect
     public string ID;
     public List<string> Args;
 }
-
-#endregion
-
-#endregion

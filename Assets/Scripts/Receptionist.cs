@@ -16,7 +16,7 @@ public class Receptionist : MonoBehaviour
             obj.SetActive(false);
         }
 
-        // DialogueManager.Instance.AddDialogue(welcomeDialogue);
+        DialogueManager.Instance.StartDialogue(welcomeDialogue);
     }
 
     public void CloseReceptionWindow()
