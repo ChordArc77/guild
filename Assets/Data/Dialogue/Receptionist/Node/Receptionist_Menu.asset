@@ -21,4 +21,6 @@ MonoBehaviour:
     Effects:
     - ID: Dialogue_End
       Args: []
+    - ID: Receptionist_Exit
+      Args: []
     NextNodeID: 

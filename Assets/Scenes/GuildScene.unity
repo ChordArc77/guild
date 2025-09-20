@@ -705,6 +705,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4806001874042742466}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &769898187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 769898188}
+  - component: {fileID: 769898189}
+  - component: {fileID: 769898190}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &769898188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769898187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &769898189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769898187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6ed47ccc3d8154ca66274488e9dbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueWindow: {fileID: 1531984221}
+  AllDialogue:
+  - {fileID: 11400000, guid: 85373a9fa34916248bf689ade4f6e219, type: 2}
+  AllDialogueNode:
+  - {fileID: 11400000, guid: 4511e7b96466c2b4586261f207930da1, type: 2}
+  - {fileID: 11400000, guid: 2f67e44187bcd7b4db9495169fdde5b7, type: 2}
+  NPCNameDictionary: {fileID: 11400000, guid: 295aabaeaa470b548b010a0ce0951e77, type: 2}
+  text: {fileID: 11409700}
+  speakerNameText: {fileID: 339617396}
+  choicePrefab: {fileID: 5781104783655423720, guid: 292824c0461b8664dbd8a87b0163e909,
+    type: 3}
+  choiceContainer: {fileID: 1981500953}
+--- !u!114 &769898190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769898187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b02ae5cdb77ebc4da53eb708be45e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &826156583
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,14 +1061,13 @@ GameObject:
   - component: {fileID: 1531984222}
   - component: {fileID: 1531984224}
   - component: {fileID: 1531984223}
-  - component: {fileID: 1531984225}
   m_Layer: 5
   m_Name: Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1531984222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1060,29 +1128,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531984221}
   m_CullTransparentMesh: 1
---- !u!114 &1531984225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531984221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6ed47ccc3d8154ca66274488e9dbb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AllDialogue:
-  - {fileID: 11400000, guid: 85373a9fa34916248bf689ade4f6e219, type: 2}
-  AllDialogueNode:
-  - {fileID: 11400000, guid: 4511e7b96466c2b4586261f207930da1, type: 2}
-  - {fileID: 11400000, guid: 2f67e44187bcd7b4db9495169fdde5b7, type: 2}
-  NPCNameDictionary: {fileID: 11400000, guid: 295aabaeaa470b548b010a0ce0951e77, type: 2}
-  text: {fileID: 11409700}
-  speakerNameText: {fileID: 339617396}
-  choicePrefab: {fileID: 5781104783655423720, guid: 292824c0461b8664dbd8a87b0163e909,
-    type: 3}
-  choiceContainer: {fileID: 1981500953}
 --- !u!1 &1549349904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,9 +1381,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1531984222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 120}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -50, y: 190}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1981500954
@@ -1379,6 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c87f5b64110e9049842b576a3164407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 1531984222}
   padding: 10
 --- !u!1 &2045673474
 GameObject:
@@ -1548,3 +1594,4 @@ SceneRoots:
   - {fileID: 1404986310}
   - {fileID: 826156587}
   - {fileID: 1549349907}
+  - {fileID: 769898188}

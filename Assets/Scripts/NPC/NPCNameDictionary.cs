@@ -12,8 +12,6 @@ public class NPCNameDictionary : ScriptableObject
         get
         {
             if (dict != null) return dict;
-            
-            Debug.Log($"create name dictionary");
             dict = new Dictionary<string, string>();
             foreach (var entry in list)
             {

@@ -9,6 +9,8 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
 
+    [SerializeField] GameObject dialogueWindow;
+    
     public List<Dialogue> AllDialogue = new();
     public List<DialogueNode> AllDialogueNode = new();
     readonly Dictionary<string, Dialogue> dialogueDictionary = new();
@@ -26,13 +28,14 @@ public class DialogueManager : MonoBehaviour
     DialogueNode currentNode;
     Coroutine typeRoutine;
 
+    bool isWaitingForChoice;
+    List<GameObject> currentChoices = new();
+
     void Awake()
     {
         Instance = this;
         
         InitializeDictionaries();
-        
-        gameObject.SetActive(false);
     }
 
     void InitializeDictionaries()
@@ -63,6 +66,12 @@ public class DialogueManager : MonoBehaviour
                 OnNodeEnd();
             }
         }
+
+        if (typeRoutine == null && currentNode is DialogueChoiceNode)
+        {
+            // show choices after finish typing
+            OnNodeEnd();
+        }
     }
     
     IEnumerator TypeText(string line)
@@ -77,14 +86,15 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        gameObject.SetActive(true);
+        dialogueWindow.SetActive(true);
         currentDialogue = dialogue;
         NextNode(dialogue.HeadNodeID);
     }
     
-    void CloseDialogue()
+    public void CloseDialogue()
     {
-        gameObject.SetActive(false);
+        dialogueWindow.SetActive(false);
+        currentNode = null;
     }
 
     #region Node
@@ -99,7 +109,9 @@ public class DialogueManager : MonoBehaviour
                 break;
             case DialogueChoiceNode choiceNode:
                 // show choices
+                if (isWaitingForChoice) break;
                 CreateChoices(choiceNode.Choices);
+                isWaitingForChoice = true;
                 break;
         }
     }
@@ -113,7 +125,6 @@ public class DialogueManager : MonoBehaviour
     void SetNode(string nodeID)
     {
         currentNode = dialogueNodeDictionary.GetValueOrDefault(nodeID);
-        print($"set node: {currentNode.ID}");
     }
 
     void StartNode()
@@ -136,32 +147,27 @@ public class DialogueManager : MonoBehaviour
             
             var onClick = choiceInstance.GetComponentInChildren<Button>().onClick;
             onClick.AddListener(() => OnChoice(choice));
+            
+            currentChoices.Add(choiceInstance);
         }
     }
 
     void OnChoice(Choice choice)
     {
-        ActivateEffects(choice.Effects);
+        isWaitingForChoice = false;
+        
+        DialogueEffectManager.ActivateEffects(choice.Effects);
+        
         if (!string.IsNullOrEmpty(choice.NextNodeID))
         {
             NextNode(choice.NextNodeID);
         }
-    }
 
-    void ActivateEffects(List<ChoiceEffect> effects)
-    {
-        foreach (var id in effects)
+        foreach (var choiceInstance in currentChoices)
         {
-            ActivateEffect(id);
+            Destroy(choiceInstance);
         }
-    }
-    
-    void ActivateEffect(ChoiceEffect effect)
-    {
-        if (effect.ID.Equals("Dialogue_End"))
-        {
-            CloseDialogue();
-        }
+        currentChoices.Clear();
     }
     
     #endregion
