@@ -19,7 +19,7 @@ public class DialogueEffectManager : MonoBehaviour
                 DialogueManager.Instance.CloseDialogue();
                 break;
             case "Receptionist_Exit":
-                Receptionist.Instance.CloseReceptionWindow();
+                ReceptionistManager.Instance.HideWindow();
                 break;
         }
     }
