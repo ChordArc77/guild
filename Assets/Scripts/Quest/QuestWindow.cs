@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestWindow : GuildUIWindow
@@ -5,19 +6,33 @@ public class QuestWindow : GuildUIWindow
     [SerializeField] GameObject questPrefab;
     [SerializeField] Transform[] questSpawnPos;
 
+    readonly Dictionary<Quest, GameObject> questsOnBoard = new();
+
+    void Start()
+    {
+        PopulateQuests();
+    }
+
     public override void ShowWindow()
     {
         base.ShowWindow();
-        PopulateQuests();
         BackStack.Push(HideWindow);
     }
 
     void PopulateQuests()
     {
-        for (var i = 0; i < QuestManager.Instance.CurrentQuests.Count; i++)
+        for (var i = 0; i < QuestManager.Instance.AvailableQuests.Count; i++)
         {
             var instance = Instantiate(questPrefab, questSpawnPos[i]);
-            instance.GetComponent<QuestButton>().Quest = QuestManager.Instance.CurrentQuests[i];
+            var quest = instance.GetComponent<QuestButton>().Quest = QuestManager.Instance.AvailableQuests[i];
+
+            questsOnBoard.Add(quest, instance);
         }
+    }
+
+    public void RemoveQuest(Quest quest)
+    {
+        Destroy(questsOnBoard[quest]);
+        questsOnBoard.Remove(quest);
     }
 }

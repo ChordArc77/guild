@@ -48,7 +48,7 @@ public static class QuestExtensions
 {
     public static string GetText(this QuestType type)
     {
-        return type switch
+        return "Type: " + type switch
         {
             QuestType.Hunt => "Hunt",
             QuestType.Gather => "Gather",
@@ -58,7 +58,7 @@ public static class QuestExtensions
 
     public static string GetText(this QuestReward reward)
     {
-        return reward.Type switch
+        return "Reward: " + reward.Type switch
         {
             QuestRewardType.Money => $"{reward.Amount} Gold",
             QuestRewardType.Item => $"{reward.Amount} {DictionaryManager.Instance.GetItemFromID(reward.ItemID).Name}",
