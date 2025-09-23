@@ -16,7 +16,6 @@ public class DialogueManager : MonoBehaviour
 
     const float Delay = 0.03f;
 
-    Dialogue currentDialogue;
     DialogueNode currentNode;
     Coroutine typeRoutine;
 
@@ -69,7 +68,6 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         dialogueWindow.SetActive(true);
-        currentDialogue = dialogue;
         NextNode(dialogue.HeadNodeID);
         ignoreMouseInput = true;
     }

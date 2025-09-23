@@ -1,0 +1,24 @@
+public enum Race
+{
+    Human,
+    Elf,
+    DarkElf,
+    HalfElf,
+    Dwarf,
+    Halfling,
+    Catfolk,
+    Dogfolk,
+    Orc,
+    Ogre,
+    Goblin,
+    HobGoblin,
+    Dragon,
+    HalfDragon,
+    Demon,
+    HalfDemon,
+    Vampire,
+    Fairy,
+    Spirit,
+    Angel,
+    Fallen
+}
