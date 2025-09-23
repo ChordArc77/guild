@@ -4,7 +4,10 @@ using UnityEngine.Events;
 public class GradientCircleButton : MonoBehaviour
 {
     [SerializeField] float hoverRadius;
+    [SerializeField] bool onWorld;
     [SerializeField] UnityEvent onClick;
+
+    public bool log;
 
     bool isHovering;
 
@@ -25,7 +28,11 @@ public class GradientCircleButton : MonoBehaviour
 
     void CheckHovering()
     {
-        float mouseDistance = Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position);
+        float mouseDistance = Vector2.Distance(onWorld ? Camera.main.ScreenToWorldPoint(Input.mousePosition) : Input.mousePosition, transform.position);
         isHovering = mouseDistance < hoverRadius;
+        if (log)
+        {
+            print($"distance: {mouseDistance}");
+        }
     }
 }

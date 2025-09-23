@@ -6,8 +6,11 @@ using Random = UnityEngine.Random;
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
-    [SerializeField] GameObject questPrefab;
+
+    public List<Quest> CurrentQuests = new();
+
     [SerializeField] QuestWindow window;
+    [SerializeField] QuestDetailWindow detailWindow;
 
     readonly QuestType[] allTypes = (QuestType[])Enum.GetValues(typeof(QuestType));
     readonly Rank[] allRanks = (Rank[])Enum.GetValues(typeof(Rank));
@@ -15,6 +18,14 @@ public class QuestManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    void Start()
+    {
+        for (var i = 0; i < 5; i++)
+        {
+            CurrentQuests.Add(RandomQuest());
+        }
     }
 
     public void ShowWindow()
@@ -25,6 +36,16 @@ public class QuestManager : MonoBehaviour
     public void HideWindow()
     {
         window.HideWindow();
+    }
+
+    public void ShowDetailWindow(Quest quest)
+    {
+        detailWindow.Show(quest);
+    }
+
+    public void HideDetailWindow(Quest quest)
+    {
+        detailWindow.Hide();
     }
 
     public Quest RandomQuest()
@@ -47,18 +68,22 @@ public class QuestManager : MonoBehaviour
     {
         result = null;
 
-        var config = GuildManager.Instance.QuestConfig;
-        var randomValue = Random.value;
         QuestType randomType = default;
         Rank randomRank = default;
+
+        var config = GuildManager.Instance.QuestConfig;
+        var randomValue = Random.value;
         for (var i = 0; i < allTypes.Length; i++)
         {
             if (randomValue < config.TypeCdf[i])
             {
                 randomType = (QuestType)i;
+                print($"{randomValue}, {((QuestType)i).GetText()}");
                 break;
             }
         }
+
+        randomValue = Random.value;
         for (var i = 0; i < allRanks.Length; i++)
         {
             if (randomValue < config.RankCdf[i])
