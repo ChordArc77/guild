@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7922f469bcf3bc48988214368647055, type: 3}
+  m_Name: Dialogue Node Dictionary
+  m_EditorClassIdentifier: 
+  Entries:
+  - {fileID: 11400000, guid: 2f67e44187bcd7b4db9495169fdde5b7, type: 2}
+  - {fileID: 11400000, guid: 4511e7b96466c2b4586261f207930da1, type: 2}

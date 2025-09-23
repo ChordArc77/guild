@@ -9,13 +9,6 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance { get; private set; }
 
     [SerializeField] GameObject dialogueWindow;
-
-    public List<Dialogue> AllDialogue = new();
-    public List<DialogueNode> AllDialogueNode = new();
-    readonly Dictionary<string, Dialogue> dialogueDictionary = new();
-    readonly Dictionary<string, DialogueNode> dialogueNodeDictionary = new();
-    public NPCNameDictionary NPCNameDictionary;
-
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] TextMeshProUGUI speakerNameText;
     [SerializeField] GameObject choicePrefab;
@@ -30,28 +23,16 @@ public class DialogueManager : MonoBehaviour
     bool isWaitingForChoice;
     List<GameObject> currentChoices = new();
 
+    bool ignoreMouseInput;
+
     void Awake()
     {
         Instance = this;
-
-        InitializeDictionaries();
-    }
-
-    void InitializeDictionaries()
-    {
-        foreach (var dialogue in AllDialogue)
-        {
-            dialogueDictionary.Add(dialogue.ID, dialogue);
-        }
-        foreach (var node in AllDialogueNode)
-        {
-            dialogueNodeDictionary.Add(node.ID, node);
-        }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.anyKeyDown)
+        if (!ignoreMouseInput && (Input.GetMouseButtonDown(0) || Input.anyKeyDown))
         {
             if (typeRoutine != null)
             {
@@ -65,6 +46,8 @@ public class DialogueManager : MonoBehaviour
                 OnNodeEnd();
             }
         }
+
+        if (ignoreMouseInput) ignoreMouseInput = false;
 
         if (typeRoutine == null && currentNode is DialogueChoiceNode)
         {
@@ -88,6 +71,7 @@ public class DialogueManager : MonoBehaviour
         dialogueWindow.SetActive(true);
         currentDialogue = dialogue;
         NextNode(dialogue.HeadNodeID);
+        ignoreMouseInput = true;
     }
 
     public void CloseDialogue()
@@ -123,13 +107,13 @@ public class DialogueManager : MonoBehaviour
 
     void SetNode(string nodeID)
     {
-        currentNode = dialogueNodeDictionary.GetValueOrDefault(nodeID);
+        currentNode = DictionaryManager.Instance.GetDialogueNodeFromID(nodeID);
     }
 
     void StartNode()
     {
         text.text = string.Empty;
-        speakerNameText.text = NPCNameDictionary.Dictionary.TryGetValue(currentNode.SpeakerID, out var speakerName) ? speakerName : currentNode.SpeakerID;
+        speakerNameText.text = DictionaryManager.Instance.GetNPCNameFromID(currentNode.SpeakerID);
         typeRoutine = StartCoroutine(TypeText(currentNode.Text));
     }
 
