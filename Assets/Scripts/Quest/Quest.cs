@@ -43,3 +43,26 @@ public class QuestEditor : Editor
         EditorGUILayout.LabelField("Type", ((Quest)target).Type.ToString());
     }
 }
+
+public static class QuestExtensions
+{
+    public static string GetText(this QuestType type)
+    {
+        return type switch
+        {
+            QuestType.Hunt => "Hunt",
+            QuestType.Gather => "Gather",
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
+    }
+
+    public static string GetText(this QuestReward reward)
+    {
+        return reward.Type switch
+        {
+            QuestRewardType.Money => $"{reward.Amount} Gold",
+            QuestRewardType.Item => $"{reward.Amount} {DictionaryManager.Instance.GetItemFromID(reward.ItemID).Name}",
+            _ => throw new ArgumentOutOfRangeException(nameof(reward), reward, null)
+        };
+    }
+}
