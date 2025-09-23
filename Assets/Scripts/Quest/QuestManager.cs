@@ -7,7 +7,9 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
 
-    public List<Quest> CurrentQuests = new();
+    public List<Quest> AvailableQuests = new();
+    public List<Quest> HoldingQuests = new();
+    public List<Quest> ActiveQuests = new();
 
     [SerializeField] QuestWindow window;
     [SerializeField] QuestDetailWindow detailWindow;
@@ -24,9 +26,15 @@ public class QuestManager : MonoBehaviour
     {
         for (var i = 0; i < 5; i++)
         {
-            CurrentQuests.Add(RandomQuest());
+            var randomQuest = RandomQuest();
+            if (!AvailableQuests.Contains(randomQuest))
+            {
+                AvailableQuests.Add(randomQuest);
+            }
         }
     }
+
+    #region Window
 
     public void ShowWindow()
     {
@@ -47,6 +55,8 @@ public class QuestManager : MonoBehaviour
     {
         detailWindow.Hide();
     }
+
+    #endregion
 
     public Quest RandomQuest()
     {
@@ -78,7 +88,6 @@ public class QuestManager : MonoBehaviour
             if (randomValue < config.TypeCdf[i])
             {
                 randomType = (QuestType)i;
-                print($"{randomValue}, {((QuestType)i).GetText()}");
                 break;
             }
         }
@@ -102,5 +111,13 @@ public class QuestManager : MonoBehaviour
         if (hit.Count == 0) return false;
         result = hit[Random.Range(0, hit.Count)];
         return true;
+    }
+
+    public void TakeQuestFromBoard(Quest quest)
+    {
+        AvailableQuests.Remove(quest);
+        HoldingQuests.Add(quest);
+
+        window.RemoveQuest(quest);
     }
 }

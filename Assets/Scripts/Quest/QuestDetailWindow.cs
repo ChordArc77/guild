@@ -13,6 +13,7 @@ public class QuestDetailWindow : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] TextMeshProUGUI rewardText;
     [SerializeField] TextMeshProUGUI giverText;
 
+    Quest showingQuest;
     bool hovering;
 
     void Update()
@@ -26,7 +27,8 @@ public class QuestDetailWindow : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void Show(Quest quest)
     {
         gameObject.SetActive(true);
-        SetText(quest);
+        showingQuest = quest;
+        SetText();
         showing = true;
         BackStack.Push(Hide);
     }
@@ -38,14 +40,14 @@ public class QuestDetailWindow : MonoBehaviour, IPointerEnterHandler, IPointerEx
         BackStack.Remove(Hide);
     }
 
-    void SetText(Quest quest)
+    void SetText()
     {
-        nameText.text = quest.Name;
-        rankText.text = quest.Rank.GetText();
-        typeText.text = quest.Type.GetText();
-        contentText.text = quest.Content;
-        rewardText.text = quest.Reward.GetText();
-        giverText.text = quest.Giver;
+        nameText.text = showingQuest.Name;
+        rankText.text = showingQuest.Rank.GetText();
+        typeText.text = showingQuest.Type.GetText();
+        contentText.text = showingQuest.Content;
+        rewardText.text = showingQuest.Reward.GetText();
+        giverText.text = "Giver: " + showingQuest.Giver;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -56,5 +58,11 @@ public class QuestDetailWindow : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerExit(PointerEventData eventData)
     {
         hovering = false;
+    }
+
+    public void TakeQuest()
+    {
+        QuestManager.Instance.TakeQuestFromBoard(showingQuest);
+        Hide();
     }
 }
