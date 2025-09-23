@@ -53,11 +53,19 @@ public class QuestManager : MonoBehaviour
         Rank randomRank = default;
         for (var i = 0; i < allTypes.Length; i++)
         {
-            if (randomValue < config.TypeCdf[i]) randomType = (QuestType)i;
+            if (randomValue < config.TypeCdf[i])
+            {
+                randomType = (QuestType)i;
+                break;
+            }
         }
         for (var i = 0; i < allRanks.Length; i++)
         {
-            if (randomValue < config.RankCdf[i]) randomRank = (Rank)i;
+            if (randomValue < config.RankCdf[i])
+            {
+                randomRank = (Rank)i;
+                break;
+            }
         }
 
         List<Quest> hit = new();
