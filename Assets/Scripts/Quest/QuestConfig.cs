@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ public class QuestConfig : ScriptableObject
 {
     [SerializeField] Weight<Rank>[] rankWeight;
     [SerializeField] Weight<QuestType>[] typeWeight;
-    public List<Quest> QuestPool;
+    public Quest[] QuestPool;
 
     // cumulative distribution
     public float[] RankCdf;

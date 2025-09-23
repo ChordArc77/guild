@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueEffectManager : MonoBehaviour
 {
-    public static void ActivateEffects(List<ChoiceEffect> effects)
+    public static void ActivateEffects(DialogueEffect[] effects)
     {
         foreach (var id in effects)
         {
@@ -11,7 +10,7 @@ public class DialogueEffectManager : MonoBehaviour
         }
     }
 
-    static void ActivateEffect(ChoiceEffect effect)
+    static void ActivateEffect(DialogueEffect effect)
     {
         switch (effect.ID)
         {
@@ -20,6 +19,12 @@ public class DialogueEffectManager : MonoBehaviour
                 break;
             case "Receptionist_Exit":
                 ReceptionistManager.Instance.HideWindow();
+                break;
+            case "Quest_Accept":
+                QuestManager.Instance.AcceptHoldingQuest();
+                break;
+            default:
+                Debug.LogError($"Unknown Effect ID: {effect.ID}");
                 break;
         }
     }

@@ -21,7 +21,7 @@ public class DialogueManager : MonoBehaviour
     Coroutine typeRoutine;
 
     bool isWaitingForChoice;
-    List<GameObject> currentChoices = new();
+    readonly List<GameObject> currentChoices = new();
 
     bool ignoreMouseInput;
 
@@ -88,6 +88,7 @@ public class DialogueManager : MonoBehaviour
         {
             case DialogueLineNode lineNode:
                 // Start next node
+                DialogueEffectManager.ActivateEffects(lineNode.Effects);
                 NextNode(lineNode.NextNodeID);
                 break;
             case DialogueChoiceNode choiceNode:
@@ -101,13 +102,16 @@ public class DialogueManager : MonoBehaviour
 
     void NextNode(string id)
     {
-        SetNode(id);
-        StartNode();
+        if (TrySetNode(id))
+        {
+            StartNode();
+        }
     }
 
-    void SetNode(string nodeID)
+    bool TrySetNode(string nodeID)
     {
         currentNode = DictionaryManager.Instance.GetDialogueNodeFromID(nodeID);
+        return currentNode != null;
     }
 
     void StartNode()
@@ -121,15 +125,16 @@ public class DialogueManager : MonoBehaviour
 
     #region Choice
 
-    void CreateChoices(List<Choice> choices)
+    void CreateChoices(Choice[] choices)
     {
         foreach (var choice in choices)
         {
             var choiceInstance = Instantiate(choicePrefab, choiceContainer);
             choiceInstance.GetComponentInChildren<TextMeshProUGUI>().text = choice.Text;
 
-            var onClick = choiceInstance.GetComponentInChildren<Button>().onClick;
-            onClick.AddListener(() => OnChoice(choice));
+            var button = choiceInstance.GetComponentInChildren<Button>();
+            button.onClick.AddListener(() => OnChoice(choice));
+            button.interactable = DialogueChoiceConditionManager.CheckConditions(choice.Conditions);
 
             currentChoices.Add(choiceInstance);
         }
@@ -139,7 +144,7 @@ public class DialogueManager : MonoBehaviour
     {
         isWaitingForChoice = false;
 
-        DialogueEffectManager.ActivateEffects(choice.Effects);
+        ApplyEffects(choice.Effects);
 
         if (!string.IsNullOrEmpty(choice.NextNodeID))
         {
@@ -151,6 +156,15 @@ public class DialogueManager : MonoBehaviour
             Destroy(choiceInstance);
         }
         currentChoices.Clear();
+    }
+
+    #endregion
+
+    #region Effect
+
+    void ApplyEffects(DialogueEffect[] effects)
+    {
+        DialogueEffectManager.ActivateEffects(effects);
     }
 
     #endregion

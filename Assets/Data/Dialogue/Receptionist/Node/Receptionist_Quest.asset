@@ -10,22 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7237ad6dcc8f9b4d8333f90c9105a6a, type: 3}
-  m_Name: Receptionist_Menu
+  m_Name: Receptionist_Quest
   m_EditorClassIdentifier: 
-  ID: Receptionist_Menu
-  Text: How may I help you?
+  ID: Receptionist_Quest
+  Text: You wish to accept these Quests?
   SpeakerID: Receptionist
   Choices:
-  - Text: Quest
-    Conditions:
-    - ID: HasQuest
-    Effects: []
-    NextNodeID: Receptionist_Quest
-  - Text: Exit
+  - Text: Yes
     Conditions: []
     Effects:
-    - ID: Dialogue_End
+    - ID: Quest_Accept
       Args: []
-    - ID: Receptionist_Exit
-      Args: []
-    NextNodeID: 
+    NextNodeID: Receptionist_Quest_Accept
+  - Text: No
+    Conditions: []
+    Effects: []
+    NextNodeID: Receptionist_Quest_Refuse
