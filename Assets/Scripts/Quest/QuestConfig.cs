@@ -23,15 +23,11 @@ public class QuestConfig : ScriptableObject
         TypeCdf = RebuildCdf(ref typeWeight);
     }
 
-    float[] RebuildCdf<T>(ref Weight<T>[] weights)
+    static float[] RebuildCdf<T>(ref Weight<T>[] weights)
     {
         var all = (T[])Enum.GetValues(typeof(T));
 
-        if (weights.Length != all.Length)
-        {
-            Debug.LogWarning($"{name} missing weight for type: {typeof(T)}");
-            return null;
-        }
+        if (weights == null || weights.Length != all.Length) InitWeight(ref weights);
 
         var ordered = weights.OrderBy(w => w.Key).ToArray();
         var total = ordered.Sum(w => w.Value);
@@ -51,6 +47,13 @@ public class QuestConfig : ScriptableObject
         weights = ordered;
 
         return cdf;
+    }
+
+    static void InitWeight<T>(ref Weight<T>[] weights)
+    {
+        if (weights != null) return;
+        var all = (T[])Enum.GetValues(typeof(T));
+        weights = all.Select(key => new Weight<T> { Key = key, Value = 1f }).ToArray();
     }
 }
 
