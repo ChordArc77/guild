@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestWindow : GuildUIWindow
@@ -8,19 +9,20 @@ public class QuestWindow : GuildUIWindow
 
     readonly Dictionary<Quest, GameObject> questsOnBoard = new();
 
-    void Start()
-    {
-        PopulateQuests();
-    }
+    bool populated;
 
     public override void ShowWindow()
     {
         base.ShowWindow();
         BackStack.Push(HideWindow);
+
+        PopulateQuests();
     }
 
     void PopulateQuests()
     {
+        if (populated) return;
+        populated = true;
         for (var i = 0; i < QuestManager.Instance.AvailableQuests.Count; i++)
         {
             var instance = Instantiate(questPrefab, questSpawnPos[i]);
