@@ -32,6 +32,9 @@ MonoBehaviour:
     Value: 1
   - Key: 1
     Value: 1
+  QuestPool:
+  - {fileID: 11400000, guid: 9576fd804bd804f4bab1e6c9d9a1d526, type: 2}
+  - {fileID: 11400000, guid: bf83021bd19635945a8ff7283ca41f00, type: 2}
   RankCdf:
   - 0.14285715
   - 0.2857143

@@ -479,7 +479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1e10af744c36642811b9cdde5e06dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeDialogue: {fileID: 11400000, guid: 85373a9fa34916248bf689ade4f6e219, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +718,8 @@ GameObject:
   - component: {fileID: 769898189}
   - component: {fileID: 769898190}
   - component: {fileID: 769898191}
+  - component: {fileID: 769898192}
+  - component: {fileID: 769898193}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -754,12 +755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueWindow: {fileID: 1531984221}
-  AllDialogue:
-  - {fileID: 11400000, guid: 85373a9fa34916248bf689ade4f6e219, type: 2}
-  AllDialogueNode:
-  - {fileID: 11400000, guid: 4511e7b96466c2b4586261f207930da1, type: 2}
-  - {fileID: 11400000, guid: 2f67e44187bcd7b4db9495169fdde5b7, type: 2}
-  NPCNameDictionary: {fileID: 11400000, guid: 295aabaeaa470b548b010a0ce0951e77, type: 2}
   text: {fileID: 11409700}
   speakerNameText: {fileID: 339617396}
   choicePrefab: {fileID: 5781104783655423720, guid: 292824c0461b8664dbd8a87b0163e909,
@@ -790,6 +785,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 363969902}
+  welcomeDialogue: {fileID: 11400000, guid: 85373a9fa34916248bf689ade4f6e219, type: 2}
+--- !u!114 &769898192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769898187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3840b4574b5a2f84295097e44ee10343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestConfig: {fileID: 11400000, guid: ab11bd7f521f1d94ab324131113a583e, type: 2}
+  backgroundUI:
+  - {fileID: 1525773799}
+  - {fileID: 4806001874042742467}
+  - {fileID: 1596576948}
+--- !u!114 &769898193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769898187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a11d8e7b66990348b513759cdc91ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DialogueDictionary: {fileID: 11400000, guid: 213a0f7846fd1994ab1090643ef6e12b, type: 2}
+  DialogueNodeDictionary: {fileID: 11400000, guid: e325a5fca9c11af459f713cf6895f936,
+    type: 2}
+  NPCNameDictionary: {fileID: 11400000, guid: 295aabaeaa470b548b010a0ce0951e77, type: 2}
+  ItemDictionary: {fileID: 11400000, guid: ac1bfe84565f0864fa4a557445b0d448, type: 2}
 --- !u!1 &826156583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1097,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1525773797}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1525773799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8556854481655338637, guid: acb0e38d40ed9a2429f8dea6e715d350,
+    type: 3}
+  m_PrefabInstance: {fileID: 1525773797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1531984221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1342,12 @@ PrefabInstance:
 --- !u!4 &1596576947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5615231966894209840, guid: acb0e38d40ed9a2429f8dea6e715d350,
+    type: 3}
+  m_PrefabInstance: {fileID: 1596576946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1596576948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8556854481655338637, guid: acb0e38d40ed9a2429f8dea6e715d350,
     type: 3}
   m_PrefabInstance: {fileID: 1596576946}
   m_PrefabAsset: {fileID: 0}
@@ -1700,6 +1742,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acb0e38d40ed9a2429f8dea6e715d350, type: 3}
+--- !u!1 &4806001874042742467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8556854481655338637, guid: acb0e38d40ed9a2429f8dea6e715d350,
+    type: 3}
+  m_PrefabInstance: {fileID: 4806001874042742466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

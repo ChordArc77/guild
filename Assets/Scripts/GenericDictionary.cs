@@ -39,7 +39,7 @@ public abstract class GenericDictionary<TKey, TValue, TEntry> : RebuildableDicti
 
         EditorUtility.SetDirty(this);
 
-        Debug.Log($"{name} rebuild succeed with {Dictionary.Count} in dictionary");
+        // Debug.Log($"{name} rebuild succeed with {Dictionary.Count} in dictionary");
     }
 }
 
