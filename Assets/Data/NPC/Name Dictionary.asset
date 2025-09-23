@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d16bc0a32a38f54a988662591c74ea0, type: 3}
   m_Name: Name Dictionary
   m_EditorClassIdentifier: 
-  list:
+  Entries:
   - {fileID: 11400000, guid: 9c54490cb2af1124c8b6ba112ecfcd7d, type: 2}

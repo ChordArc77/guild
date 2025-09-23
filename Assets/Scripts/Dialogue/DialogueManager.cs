@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,13 +9,13 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance { get; private set; }
 
     [SerializeField] GameObject dialogueWindow;
-    
+
     public List<Dialogue> AllDialogue = new();
     public List<DialogueNode> AllDialogueNode = new();
     readonly Dictionary<string, Dialogue> dialogueDictionary = new();
     readonly Dictionary<string, DialogueNode> dialogueNodeDictionary = new();
     public NPCNameDictionary NPCNameDictionary;
-    
+
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] TextMeshProUGUI speakerNameText;
     [SerializeField] GameObject choicePrefab;
@@ -34,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        
+
         InitializeDictionaries();
     }
 
@@ -73,7 +72,7 @@ public class DialogueManager : MonoBehaviour
             OnNodeEnd();
         }
     }
-    
+
     IEnumerator TypeText(string line)
     {
         foreach (var c in line)
@@ -90,7 +89,7 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         NextNode(dialogue.HeadNodeID);
     }
-    
+
     public void CloseDialogue()
     {
         dialogueWindow.SetActive(false);
@@ -98,7 +97,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     #region Node
-    
+
     void OnNodeEnd()
     {
         switch (currentNode)
@@ -121,7 +120,7 @@ public class DialogueManager : MonoBehaviour
         SetNode(id);
         StartNode();
     }
-    
+
     void SetNode(string nodeID)
     {
         currentNode = dialogueNodeDictionary.GetValueOrDefault(nodeID);
@@ -130,24 +129,24 @@ public class DialogueManager : MonoBehaviour
     void StartNode()
     {
         text.text = string.Empty;
-        speakerNameText.text = NPCNameDictionary.Dict.TryGetValue(currentNode.SpeakerID, out var speakerName) ? speakerName : currentNode.SpeakerID;
+        speakerNameText.text = NPCNameDictionary.Dictionary.TryGetValue(currentNode.SpeakerID, out var speakerName) ? speakerName : currentNode.SpeakerID;
         typeRoutine = StartCoroutine(TypeText(currentNode.Text));
     }
 
     #endregion
 
     #region Choice
-    
+
     void CreateChoices(List<Choice> choices)
     {
         foreach (var choice in choices)
         {
             var choiceInstance = Instantiate(choicePrefab, choiceContainer);
             choiceInstance.GetComponentInChildren<TextMeshProUGUI>().text = choice.Text;
-            
+
             var onClick = choiceInstance.GetComponentInChildren<Button>().onClick;
             onClick.AddListener(() => OnChoice(choice));
-            
+
             currentChoices.Add(choiceInstance);
         }
     }
@@ -155,9 +154,9 @@ public class DialogueManager : MonoBehaviour
     void OnChoice(Choice choice)
     {
         isWaitingForChoice = false;
-        
+
         DialogueEffectManager.ActivateEffects(choice.Effects);
-        
+
         if (!string.IsNullOrEmpty(choice.NextNodeID))
         {
             NextNode(choice.NextNodeID);
@@ -169,6 +168,6 @@ public class DialogueManager : MonoBehaviour
         }
         currentChoices.Clear();
     }
-    
+
     #endregion
 }

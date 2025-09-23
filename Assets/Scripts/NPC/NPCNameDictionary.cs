@@ -1,22 +1,8 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 [CreateAssetMenu(menuName = "NPC Data/NPC Name Dictionary")]
-public class NPCNameDictionary : ScriptableObject
+public class NPCNameDictionary : GenericDictionary<string, string, NPCName>
 {
-    public NPCName[] Names;
-    public Dictionary<string, string> Dictionary;
-
-    void OnValidate() => Rebuild();
-    void OnEnable() => Rebuild();
-
-    void Rebuild()
-    {
-        if (Names == null) return;
-
-        foreach (var npcName in Names)
-        {
-            Dictionary.TryAdd(npcName.ID, npcName.Name);
-        }
-    }
+    protected override string GetKeyFromEntry(NPCName entry) => entry.ID;
+    protected override string GetValueFromEntry(NPCName entry) => entry.Name;
 }
