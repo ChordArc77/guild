@@ -22,3 +22,4 @@ MonoBehaviour:
   TargetID: 1
   Amount: 10
   Giver: Guild
+  Due: 1

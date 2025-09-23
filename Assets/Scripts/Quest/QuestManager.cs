@@ -120,4 +120,10 @@ public class QuestManager : MonoBehaviour
 
         window.RemoveQuest(quest);
     }
+
+    public void AcceptHoldingQuest()
+    {
+        ActiveQuests.AddRange(HoldingQuests);
+        HoldingQuests.Clear();
+    }
 }

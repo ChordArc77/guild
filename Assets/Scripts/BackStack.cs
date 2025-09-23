@@ -25,7 +25,6 @@ public class BackStack : MonoBehaviour
 
     public static bool TryBack()
     {
-        print("try back");
         if (Stack.Count == 0) return false;
         Stack.Pop().Invoke();
         return true;

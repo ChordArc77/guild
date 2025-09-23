@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f7af8fac1dfde4880801bcb02b94a2, type: 3}
-  m_Name: Gather_HealPlant
+  m_Script: {fileID: 11500000, guid: d5335f00588a5054d920e83ee1aa60e4, type: 3}
+  m_Name: Receptionist_Quest_Refuse
   m_EditorClassIdentifier: 
-  Name: Gather Heal Plant
-  Rank: 6
-  Reward:
-    Type: 1
-    Amount: 5
-    ItemID: 1
-  Content: Gather 10 Heal Plant
-  TargetID: 1
-  Amount: 10
-  Giver: Guild
-  Due: 1
+  ID: Receptionist_Quest_Refuse
+  Text: Anytime~
+  SpeakerID: Receptionist
+  NextNodeID: 
+  Effects:
+  - ID: Dialogue_End
+    Args: []
+  - ID: Receptionist_Exit
+    Args: []

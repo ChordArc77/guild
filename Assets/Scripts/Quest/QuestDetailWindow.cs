@@ -10,6 +10,7 @@ public class QuestDetailWindow : MonoBehaviour, IPointerEnterHandler, IPointerEx
     [SerializeField] TextMeshProUGUI rankText;
     [SerializeField] TextMeshProUGUI typeText;
     [SerializeField] TextMeshProUGUI contentText;
+    [SerializeField] TextMeshProUGUI dueText;
     [SerializeField] TextMeshProUGUI rewardText;
     [SerializeField] TextMeshProUGUI giverText;
 
@@ -46,8 +47,9 @@ public class QuestDetailWindow : MonoBehaviour, IPointerEnterHandler, IPointerEx
         rankText.text = showingQuest.Rank.GetText();
         typeText.text = showingQuest.Type.GetText();
         contentText.text = showingQuest.Content;
+        dueText.text = $"Due : {showingQuest.Due} Days";
         rewardText.text = showingQuest.Reward.GetText();
-        giverText.text = "Giver: " + showingQuest.Giver;
+        giverText.text = "Giver : " + showingQuest.Giver;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
