@@ -56,7 +56,7 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
-    public void SetSlot(int n)
+    public static void SetSlot(int n)
     {
         slot = n;
     }

@@ -4,6 +4,7 @@ public class DialogueEffectManager : MonoBehaviour
 {
     public static void ActivateEffects(DialogueEffect[] effects)
     {
+        if (effects == null) return;
         foreach (var id in effects)
         {
             ActivateEffect(id);
