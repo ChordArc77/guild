@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,8 +7,8 @@ public class LoadSceneManager : MonoBehaviour
 {
     [SerializeField] Button[] slots;
     [SerializeField] Button backButton;
-    [SerializeField] string titleSceneName = "TitleScene";
-    [SerializeField] string gameSceneName = "GuildScene"; // change this someday
+    [SerializeField] SceneAsset titleScene;
+    [SerializeField] SceneAsset gameScene;
 
     void Awake()
     {
@@ -21,21 +22,22 @@ public class LoadSceneManager : MonoBehaviour
 
     void OnDestroy()
     {
-        foreach (var slot in slots)
+        for (var i = 0; i < slots.Length; i++)
         {
-            slot.onClick.RemoveAllListeners();
+            var id = i + 1;
+            slots[i].onClick.RemoveListener(() => HandleSlot(id));
         }
-        backButton.onClick.RemoveAllListeners();
+        backButton.onClick.RemoveListener(HandleBack);
     }
 
     void HandleBack()
     {
-        SceneManager.LoadScene(titleSceneName);
+        SceneManager.LoadScene(titleScene.name);
     }
 
     void HandleSlot(int id)
     {
         SaveLoadManager.SetSlot(id);
-        SceneManager.LoadScene(gameSceneName);
+        SceneManager.LoadScene(gameScene.name);
     }
 }

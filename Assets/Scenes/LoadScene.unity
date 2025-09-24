@@ -1438,8 +1438,8 @@ MonoBehaviour:
   - {fileID: 313227384}
   - {fileID: 888304937}
   backButton: {fileID: 268394519}
-  titleSceneName: TitleScene
-  gameSceneName: GuildScene
+  titleScene: {fileID: 102900000, guid: 816e0fb8e3bfedd47bdfae626fa9f478, type: 3}
+  gameScene: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
 --- !u!4 &1725180205
 Transform:
   m_ObjectHideFlags: 0

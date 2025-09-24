@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 820709271}
   quitButton: {fileID: 848305211}
-  loadSceneName: LoadScene
+  loadScene: {fileID: 102900000, guid: 620bdfca9ad5be24dbce9fe85832da54, type: 3}
 --- !u!1 &182085586
 GameObject:
   m_ObjectHideFlags: 0

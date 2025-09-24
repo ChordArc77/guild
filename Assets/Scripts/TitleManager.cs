@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField] Button startButton;
     [SerializeField] Button quitButton;
-    [SerializeField] string loadSceneName = "LoadScene";
+    [SerializeField] SceneAsset loadScene;
 
     void Awake()
     {
@@ -22,7 +23,7 @@ public class TitleManager : MonoBehaviour
 
     void HandleStart()
     {
-        SceneManager.LoadScene(loadSceneName);
+        SceneManager.LoadScene(loadScene.name);
     }
 
     void HandleQuit()
