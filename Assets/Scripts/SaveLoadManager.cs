@@ -7,18 +7,20 @@ public class SaveLoadManager : MonoBehaviour
     static int slot;
 
     static string GetDir() => Application.persistentDataPath;
-    static string GetPath() => Path.Combine(GetDir(), slot + ".json");
-    static string GetTempPath() => GetPath() + ".tmp";
-    static string GetBackupPath() => GetPath() + ".bak";
+    static string GetPath(string filename) => Path.Combine(GetDir(), $"{slot}", filename);
+    static string GetTempPath(string path) => path + ".tmp";
+    static string GetBackupPath(string path) => path + ".bak";
 
-    public static void Save<T>(T data)
+    #region Save
+
+    public static void Save<T>(string filename, T data)
     {
         var json = JsonUtility.ToJson(data);
 
         if (!Directory.Exists(GetDir())) Directory.CreateDirectory(GetDir());
-        var path = GetPath();
-        var tmp = GetTempPath();
-        var bak = GetBackupPath();
+        var path = GetPath(filename);
+        var tmp = GetTempPath(path);
+        var bak = GetBackupPath(path);
 
         File.WriteAllText(tmp, json);
         if (File.Exists(path))
@@ -28,10 +30,19 @@ public class SaveLoadManager : MonoBehaviour
         File.Move(tmp, path);
     }
 
-    public static bool TryLoad<T>(out T data)
+    public static void SaveStatus(PlayerStatus status)
     {
-        var path = GetPath();
-        var backup = GetBackupPath();
+        Save("PlayerStatus", status);
+    }
+
+    #endregion
+
+    #region Load
+
+    public static bool TryLoad<T>(string filename, out T data)
+    {
+        var path = GetPath(filename);
+        var backup = GetBackupPath(path);
 
         if (TryRead(path, out data)) return true;
         if (TryRead(backup, out data)) return true;
@@ -55,6 +66,13 @@ public class SaveLoadManager : MonoBehaviour
             }
         }
     }
+
+    public static bool TryLoadStatus(out PlayerStatus status)
+    {
+        return TryLoad("PlayerStatus", out status);
+    }
+
+    #endregion
 
     public static void SetSlot(int n)
     {

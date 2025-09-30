@@ -13,11 +13,11 @@ public class PlayerManager : MonoBehaviour
 
     public void LoadPlayerStatus()
     {
-        playerStatus = SaveLoadManager.TryLoad(out PlayerStatus status) ? status : null;
+        playerStatus = SaveLoadManager.TryLoadStatus(out var status) ? status : null;
     }
 
     public void SavePlayerStatus()
     {
-        SaveLoadManager.Save(playerStatus);
+        SaveLoadManager.SaveStatus(playerStatus);
     }
 }

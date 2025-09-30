@@ -17,6 +17,7 @@ public class LoadSceneManager : MonoBehaviour
             var id = i + 1;
             slots[i].onClick.AddListener(() => HandleSlot(id));
         }
+        LoadSlots();
         backButton.onClick.AddListener(HandleBack);
     }
 
@@ -30,7 +31,9 @@ public class LoadSceneManager : MonoBehaviour
         backButton.onClick.RemoveListener(HandleBack);
     }
 
-    void HandleBack()
+    #region Handle
+
+    public void HandleBack()
     {
         SceneManager.LoadScene(titleScene.name);
     }
@@ -40,4 +43,24 @@ public class LoadSceneManager : MonoBehaviour
         SaveLoadManager.SetSlot(id);
         SceneManager.LoadScene(gameScene.name);
     }
+
+    #endregion
+
+    #region Load
+
+    void LoadSlots()
+    {
+        for (var i = 0; i < 3; i++)
+        {
+            LoadSlot(i);
+        }
+    }
+
+    void LoadSlot(int id)
+    {
+        SaveLoadManager.SetSlot(id);
+        slots[id].GetComponent<SaveSlot>().SetSlot(SaveLoadManager.TryLoadStatus(out var status) ? status : null);
+    }
+
+    #endregion
 }
